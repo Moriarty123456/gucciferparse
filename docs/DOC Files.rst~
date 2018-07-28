@@ -1,0 +1,5 @@
+Microsoft .doc files are of the older type of wordprocessing files and are binary files. This means we can't view the source data directly in a text editor, but have to view them through a program called a *Hex Editor*.
+
+In the Hex Editor they'll be displayed as hexadecimal characters that denote the binary. Here are the first few lines of "coordinated-shared-passwords.doc" from the Guccifer2.0. Archive:
+
+image:: docinhex.png
