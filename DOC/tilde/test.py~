@@ -1,0 +1,42 @@
+import sys
+
+sys.path.append("/home/david/Documents/ClintonJail/Guccifer2.0/Docs&Tools/Python/ALL_GUC_FILE_PROJECT/python/modules/DOC")
+
+from binarytoolkit import *
+from docsuminfoPARSE import *
+
+infile = "/home/david/Documents/ClintonJail/Guccifer2.0/Docs&Tools/Python/ALL_GUC_FILE_PROJECT/downloaded_docs/xls/1st-quarter-targeted-renewals.xls"
+
+
+def SISTwo(siscontents):
+    SISPropDict = {}
+    #we know the likely guids ...
+    if siscontents[12] == "05d5cdd5":
+        SISPropDict["SISUserGUID"] = "{D5CDD505-2E9C-101B-9397-08002B2CF9AE}"
+    else:
+        # there's something wrong. There should be the User Defined GUID Here. 
+        print "there's something wrong. There should be the User Defined GUID Here."
+        SISPropDict["SISInfoGUID"] = siscontents[12]+siscontents[13]+siscontents[14]+siscontents[15]
+    so = siscontents[16]
+    SISPropDict["SISOffsetHex"]=hex(int(so[6:8]+so[4:6]+so[2:4]+so[0:2],16))
+    SISPropDict["SISOffsetDec"]=int(so[6:8]+so[4:6]+so[2:4]+so[0:2],16)
+
+    #######################################
+    # THIS IS THE START OF THE DICTIONARY #
+    #######################################
+    dictstart = siscontents[(int(so[6:8]+so[4:6]+so[2:4]+so[0:2],16))/4]
+    print "dictstart: ", dictstart
+    print "should be ac050000, for 1st quarter targeted.xls"
+
+    ##########################################################
+    # CONTINUE FROM HERE:                                    #
+    # https://msdn.microsoft.com/en-us/library/dd942093.aspx #
+    ##########################################################
+
+n, rawsectorlist =  SummaryInfoLocation(infile)
+for sector in rawsectorlist:
+    print sector[16*8:17*8]
+    fourbytesector = Header2FourBytes(sector)
+    print fourbytesector[16]
+    #SISTwo(fourbytesector)
+    

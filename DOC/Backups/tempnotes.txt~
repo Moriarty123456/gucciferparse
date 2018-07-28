@@ -1,0 +1,58 @@
+FILE
+=================
+OFFICIALout-of-region-ne-donors.xls
+OFFICIAL ROOT TIMES
+=================
+['2016-07-04T11:06:45.385000']
+OFFICIAL ROOT CHUNK
+=================
+{'Left Sibling ID': 'ffffffff', 'Next SecSize Decimal': 768, 'Root Timestamp': ['2016-07-04T11:06:45.385000'], 'Directory Name': 'Root Entry', 'Modified Time': '2016-07-04T11:06:45.385000', 'Creation Time': '0000000000000000', 'Dir Name Length': '16', 'Child ID': '02000000', 'State Bits': '00000000', 'Object Type': '5', 'Red Black': '01', 'CLSID': ['20080200', '00000000', 'c0000000', '00000046'], 'Next SecLoc Decimal': 64512, 'Right Sibling ID': 'ffffffff'}
+=================
+OFFICIAL SUMMARY INFORMATION
+Is there a Summary Info for Orphan?
+53760
+53760
+53760
+Summary Info Official
+----------------------------
+{'DWORD-cSections': '01000000', 'NumberPropertiesHex': '0x7', 'FilePointer-SectionSize': '0xb0', 'GUID-formatId': 'e0859ff2f94f6810ab9108002b27b3d9', 'FilePointer-sectionOffset': '0x30', 'WORD-version': '0000', 'OSMinorVersion': '00', 'NumberPropertiesDec': 7, 'OSMajorVersion': '05', 'OSType': '0200', 'WORDbyteOrder': 'feff', 'GUID-applicationClsid': '00000000000000000000000000000000'}
+========================
+['GKPIDSI_CODEPAGE', 1252, 'GKPIDSI_AUTHOR', 'Lauren Force', 'GKPIDSI_LASTAUTHOR', 'Lauren Force', 'GKPIDSI_APPNAME', 'Microsoft Excel', 'GKPIDSI_CREATE_DTM', '2006-11-09T19:23:02', 'GKPIDSI_LASTSAVE_DTM', '2006-11-09T20:20:56', 'GKPIDSI_DOC_SECURITY']
+========================
+Summary Info For Atlernate Root
+----------------------------
+{'DWORD-cSections': '01000000', 'NumberPropertiesHex': '0x7', 'FilePointer-SectionSize': '0xb0', 'GUID-formatId': 'e0859ff2f94f6810ab9108002b27b3d9', 'FilePointer-sectionOffset': '0x30', 'WORD-version': '0000', 'OSMinorVersion': '00', 'NumberPropertiesDec': 7, 'OSMajorVersion': '05', 'OSType': '0200', 'WORDbyteOrder': 'feff', 'GUID-applicationClsid': '00000000000000000000000000000000'}
+========================
+['GKPIDSI_CODEPAGE', 1252, 'GKPIDSI_AUTHOR', 'Lauren Force', 'GKPIDSI_LASTAUTHOR', 'Lauren Force', 'GKPIDSI_APPNAME', 'Microsoft Excel', 'GKPIDSI_CREATE_DTM', '2006-11-09T19:23:02', 'GKPIDSI_LASTSAVE_DTM', '2006-11-09T20:20:56', 'GKPIDSI_DOC_SECURITY']
+========================
+========================
+Offical DOCUMENT SUMMARY
+========================
+orphaned Doc Sum?
+There is no off dsl
+but there is an Alternate DSL
+number of guids:  1
+(['NUMBEROFSECTIONS:', 4096, {'WORD-version': '0000', 'OSMinorVersion': '00', 'OSMajorVersion': '05', 'OSType': '0200', 'WORDbyteOrder': 'feff', 'GUID-applicationClsid': '00000000000000000000000000000000'}, 'DWORD-cSections:', 1, {'SISOffset': '30000000', 'NumberPropertiesDec': 9, 'SISInfoGUID': '{D5CDD502-2E9C-101B-9397-08002B2CF9AE}', 'SISLengthDec': 220}, ['GKPIDDSI_CODEPAGE', 1252, 'GKPIDDSI_COMPANY', 'DCCC', 'GKPIDDSI_VERSION', 728932, 'GKPIDDSI_SCALE', 0, 'GKPIDDSI_LINKSDIRTY', 0, 'GKPIDDSI_SHAREDDOC', 0, 'GKPIDDSI_HYPERLINKSCHANGED', 0, 'GKPIDDSI_DOCPARTS', '\x07', 'GKPIDDSI_HEADINGPAIR']], ['GKPIDDSI_CODEPAGE', 1252, 'GKPIDDSI_COMPANY', 'DCCC', 'GKPIDDSI_VERSION', 728932, 'GKPIDDSI_SCALE', 0, 'GKPIDDSI_LINKSDIRTY', 0, 'GKPIDDSI_SHAREDDOC', 0, 'GKPIDDSI_HYPERLINKSCHANGED', 0, 'GKPIDDSI_DOCPARTS', '\x07', 'GKPIDDSI_HEADINGPAIR'])
+There's no sinle User DSL.
+But there's a UserDef and Doc Sum location
+Dictionary Property is
+['05000000', '02000000', '14000000', '5f004100', '64004800', '6f006300', '52006500', '76006900', '65007700', '43007900', '63006c00', '65004900', '44000000', '03000000', '10000000', '5f004e00', '65007700', '52006500', '76006900', '65007700', '43007900', '63006c00', '65000000', '04000000', '0e000000', '5f004500', '6d006100', '69006c00', '53007500', '62006a00', '65006300', '74000000', '05000000', '0d000000', '5f004100', '75007400', '68006f00', '72004500', '6d006100', '69006c00', '00000000', '06000000', '18000000', '5f004100', '75007400', '68006f00', '72004500', '6d006100', '69006c00', '44006900', '73007000', '6c006100', '79004e00', '61006d00', '65000000']
+CodePage Property is
+['02000000', 'b0040000']
+Locale Property is
+['13000000', '09040000']
+Property Number :02000000 is
+['03000000', '49e4a511']
+Property Number :03000000 is
+['1f000000', '01000000', '00000000']
+Property Number :04000000 is
+['1f000000', '17000000', '48007300', '75002000', '69006e00', '66006f00', '20006600', '72006f00', '6d002000', '64006100', '74006100', '62006100', '73006500', '00000000']
+Property Number :05000000 is
+['1f000000', '12000000', '47006100', '72007200', '61006800', '61006e00', '40004400', '43004300', '43002e00', '4f005200', '47000000']
+Property Number :06000000 is
+['1f000000', '10000000', '41006e00', '64007200', '65007700', '20004700', '61007200', '72006100', '68006100', '6e000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000', '00000000']
+dickanswers
+[['Property Number :03000000', ''], ['Property Number :04000000', 'Hsu info from database'], ['Property Number :05000000', 'Garrahan@DCCC.ORG'], ['Property Number :06000000', 'Andrew Garrahan']]
+
+SISPropDict
+{'FirstUUID': '02d5cdd59c2e1b10939708002b2cf9ae', 'SecondUUID': '05d5cdd59c2e1b10939708002b2cf9ae', 'FirstOffsetDec': 68, 'UserDefLocale': 'US English', 'UserDefinedCodepage': 1200, 'SecondOffsetInChunks': 18, 'dicktophonedict': {2: '_AdHocReviewCycleID', 3: '_NewReviewCycle', 4: '_EmailSubject', 5: '_AuthorEmail', 6: '_AuthorEmailDisplayName'}, 'SecondOffsetDec': 72, 'Property Number :02000000': 296084553, 'dslengthChunks': 55, 'LenDictDec': 468, 'FirstOffsetInChunks': 17}

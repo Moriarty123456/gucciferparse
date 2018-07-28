@@ -1,0 +1,199 @@
+import sys
+import struct
+import binascii
+import array
+import urllib2
+import csv
+
+from hachoir_metadata import metadata
+from hachoir_core.cmd_line import unicodeFilename
+from hachoir_parser import createParser
+
+sys.path.append("/home/david/Documents/ClintonJail/Guccifer2.0/Docs&Tools/Python/ALL_GUC_FILE_PROJECT/python/modules/DOC")
+
+from filetimes import *
+
+
+def OutputHex(filename):
+    with open(filename, "rb") as f:      
+        hexdata = binascii.hexlify(f.read())
+    return hexdata
+
+def OutputHeader(filename):
+    with open(filename, "rb") as f:      
+        hexdata = binascii.hexlify(f.read())
+        header = hexdata.split("feffffff")[0]
+    return header
+
+def Header2FourBytes(header):
+    y=8
+    headlist=[]
+    for x in range(len(header)/8):
+        headlist.append(header[(y-8):y])
+        y=y+8
+
+    return headlist
+
+# Directory Sector Locations (DSL's) start at the Ninth 4 byte chunk
+def ListDSL(headlist):
+    DSLList=[]
+    for ds in headlist[9:]:
+         FourByte = ds[6:8]+ds[4:6]+ds[2:4]+ds[0:2]
+         if int(FourByte,16) == 0:
+             pass
+         else:
+             SL = (int(FourByte,16)+1)*512
+             print FourByte, SL, hex(SL)
+             DSLList.append(SL)
+
+    return DSLList
+        
+def ListRootOffset(headlist, herx):
+    RootOffsetList =[]
+    for offset in headlist:
+        #note herx offsets will be in bits, so x2 for Bytes
+        if "52006f006f00740020" in herx[(2*offset):((2*offset)+48)]:
+            RootOffsetList.append(offset)
+        else:
+            pass
+    return RootOffsetList
+
+def RootSectionList(rootoffsetlist, herx):
+    for root in rootoffsetlist:
+        section = herx[(2*root):(2*(root+256))]
+        root4bytelist = Header2FourBytes(section)
+    return section, root4bytelist
+
+def StartingSectorLocation(root4bytelist):
+    # a compound File Directory, like the Root Directory is 128 Bytes long. The last two 4 byte chunks (29 & 30) will be the Starting Sector Location (if it exists), and the Stream Size. As before we add one to the number then times by the sector size.
+    sl = root4bytelist[29]
+    secloc = sl[6:8]+sl[4:6]+sl[2:4]+sl[0:2]
+    sectorlocation = (int(secloc,16)+1)*512
+    ss = root4bytelist[30]
+    streamsize = int((ss[6:8]+ss[4:6]+ss[2:4]+ss[0:2]),16)
+    return sectorlocation, streamsize
+    
+def RootTimes(root4bytelist):
+
+    rtimelist=[]
+    index = 0
+    indlist=[]
+    ftimelist = []
+    # if the 4 byte section ends in 01 it could be a timestamp, but not if the previous 4 Byte section is all zeros.
+    for fourbyte in root4bytelist:
+        if fourbyte[6:8] == "01" or fourbyte[6:8] == "02":
+            indlist.append(index)
+        index = index + 1
+    
+    # Check to see if prior chunk is just zeros
+    for inchunk in indlist:
+        if int(root4bytelist[inchunk-1],16) == 0:
+            pass
+        else:
+            timestamp = root4bytelist[inchunk-1] + root4bytelist[inchunk]
+            rtimelist.append(timestamp)
+    for ts in rtimelist:
+        hightime = ts[6:8]+ts[4:6]+ts[2:4]+ts[0:2]
+        lowtime =ts[14:16]+ts[12:14]+ts[10:12]+ts[8:10]
+        ft= hightime+":"+lowtime
+        h2, h1 = [int(h, base=16) for h in ft.split(':')]
+        ft_dec = struct.unpack('>Q', struct.pack('>LL', h1, h2))[0]
+        naive = (filetime_to_dt(ft_dec))
+        filetime = naive.isoformat()
+        ftimelist.append(filetime)
+        
+    return ftimelist
+    
+
+def binaryPARSE(file):
+    ###################################################
+    # INPUT: a file path to a binary doc or xls file  #
+    # OUTPUT: a dictionary of attributes for the file #
+    ###################################################
+    OffSetChaseList = []
+    binarydict = {}
+    try:
+        herx = OutputHex(file)
+        header = OutputHeader(file)
+        headlist =  Header2FourBytes(header)
+        dsllist = ListDSL(headlist)
+        root = ListRootOffset(dsllist, herx)
+        rootsection, rootin4bytes = RootSectionList(root, herx)
+        rtlist=RootTimes(rootin4bytes)
+        startingsectorloc, streamsize = StartingSectorLocation(rootin4bytes)
+        chaselist = []
+        for r in root:
+            
+            chaselist.append(file)
+            chaselist.append(r)
+            chaselist.append(hex(r))
+            chaselist.append(headlist)
+            chaselist.append(rootin4bytes)
+            chaselist.append(rtlist)
+            chaselist.append(startingsectorloc)
+            chaselist.append(streamsize)
+            chaselist.append(rootsection)
+            
+        OffSetChaseList.append(chaselist)  
+    except:
+        print "Computer says 'no'"
+    
+    for line in OffSetChaseList:
+        binarydict["Filename"] = line[0]
+        binarydict["RootOffset Decimal"] = line[1]
+        binarydict["RootOffset Hex"] = line[2]
+        binarydict["Directory Name"] = line[4][0:16]
+        binarydict["Root Timestamp"] = line[5]
+        binarydict["Dir Name Length"] = line[4][16][0:2]
+        binarydict["Object Type"] = line[4][16][5:6]
+        binarydict["Red Black"] = line[4][16][6:]
+        binarydict["Left Sibling ID"] = line[4][17]
+        binarydict["Right Sibling ID"] = line[4][18]
+        binarydict["Child ID"] = line[4][19]
+        binarydict["CLSID"] = line[4][20:24]
+        binarydict["State Bits"] = line[4][24]
+        binarydict["Creation Time"] = line[4][25:27]
+        binarydict["Modified Time"] = line[4][27:29]
+        binarydict["Next SecLoc Raw"] = line[4][29]
+        binarydict["Next SecSize Raw"] = line[4][30]
+        binarydict["Next SecLoc Decimal"] = line[6]
+        binarydict["Next SecLoc Hex"] = hex(line[6])
+        binarydict["Next SecSize Decimal"] = line[7]
+        binarydict["Next SecSize Hex"] = hex(line[7])
+        start= line[6]*2
+        end = (line[6]+(128*4))*2
+        print hex(start/2)
+        print Header2FourBytes(herx[start:end])
+        
+    return binarydict, OffSetChaseList
+
+file = "/home/david/Documents/ClintonJail/Guccifer2.0/Docs&Tools/Python/ALL_GUC_FILE_PROJECT/downloaded_docs/doc/hsu.doc"
+
+mydict, offsetchase = binaryPARSE(file)
+# print "filename ", mydict["Filename"]
+# print "root offset dec ", mydict["RootOffset Decimal"]
+# print "root offset hex ", mydict["RootOffset Hex"]
+# print "dir name ", mydict["Directory Name"]
+# print "root timestamp", mydict["Root Timestamp"]
+# print "dirname length ", mydict["Dir Name Length"]
+# print "object type", mydict["Object Type"]
+# print "red or black", mydict["Red Black"]
+# print "left sibling id ", mydict["Left Sibling ID"]
+# print "Right Sibling ID ", mydict["Right Sibling ID"]
+# print "Child ID ", mydict["Child ID"]
+# print "CLSID ", mydict["CLSID"]
+# print "State Bits ", mydict["State Bits"]
+# print "Note: The root storage's creation and modification time stamps are normally stored on the file itself in the file system."
+# print "Creation time for a storage object. Must be 000's for Root.UTC"
+# print "Creation Time ", mydict["Creation Time"]
+# print "Modified time storage object, or root. Stream must be zeros"
+# print "Modified Time ", mydict["Modified Time"]
+# print "Starting Sector Location. If stream = sector location. If Root = mini-stream Location. If Storage all zeros"
+# print "Next SecLoc Raw ", mydict["Next SecLoc Raw"]
+# print "Next SecLoc Decimal ", mydict["Next SecLoc Decimal"]
+# print "Next SecLoc Hex ", mydict["Next SecLoc Hex"]
+# print "Next SecSize Raw ",mydict["Next SecSize Raw"]
+# print "Next SecSize Decimal ", mydict["Next SecSize Decimal"]
+# print "Next SecSize Hex ", mydict["Next SecSize Hex"]
+
+#print offsetchase

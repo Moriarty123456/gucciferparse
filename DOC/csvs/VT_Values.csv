@@ -1,0 +1,71 @@
+ Type , Format 
+VT_EMPTY (0x0000),MUST be zero bytes in length.
+VT_NULL (0x0001),MUST be zero bytes in length.
+VT_I2 (0x0002),"MUST be a 16-bit signed integer, followed by zero padding to 4 bytes."
+VT_I4 (0x0003),MUST be a 32-bit signed integer.
+VT_R4 (0x0004),MUST be a 4-byte (single-precision) IEEE floating-point number.
+VT_R8 (0x0005),MUST be an 8-byte (double-precision) IEEE floating-point number.
+VT_CY (0x0006),MUST be a CURRENCY (Packet Version).
+VT_DATE (0x0007),MUST be a DATE (Packet Version).
+VT_BSTR (0x0008),MUST be a CodePageString.
+VT_ERROR (0x000A),"MUST be a 32-bit unsigned integer representing an HRESULT, as specified in [MS-DTYP] section 2.2.18."
+VT_BOOL (0x000B),"MUST be a VARIANT_BOOL as specified in [MS-OAUT] section 2.2.27, followed by zero padding to 4 bytes."
+VT_DECIMAL (0x000E),MUST be a DECIMAL (Packet Version).
+VT_I1 (0x0010),"MUST be a 1-byte signed integer, followed by zero padding to 4 bytes."
+VT_UI1 (0x0011),"MUST be a 1-byte unsigned integer, followed by zero padding to 4 bytes."
+VT_UI2 (0x0012),"MUST be a 2-byte unsigned integer, followed by zero padding to 4 bytes."
+VT_UI4 (0x0013),MUST be a 4-byte unsigned integer.
+VT_I8 (0x0014),MUST be an 8-byte signed integer.
+VT_UI8 (0x0015),MUST be an 8-byte unsigned integer.
+VT_INT (0x0016),MUST be a 4-byte signed integer.
+VT_UINT (0x0017),MUST be a 4-byte unsigned integer.
+VT_LPSTR (0x001E),MUST be a CodePageString.
+VT_LPWSTR (0x001F),MUST be a UnicodeString.
+VT_FILETIME (0x0040),MUST be a FILETIME (Packet Version).
+VT_BLOB (0x0041),MUST be a BLOB.
+VT_STREAM (0x0042),MUST be an IndirectPropertyName. The storage representing the (non-simple) property set MUST have a stream element with this name.
+VT_STORAGE (0x0043),MUST be an IndirectPropertyName. The storage representing the (non-simple) property set MUST have a storage element with this name.
+VT_STREAMED_OBJECT (0x0044),MUST be an IndirectPropertyName. The storage representing the (non-simple) property set MUST have a stream element with this name.
+VT_STORED_OBJECT (0x0045),MUST be an IndirectPropertyName. The storage representing the (non-simple) property set MUST have a storage element with this name.
+VT_BLOB_OBJECT (0x0046),MUST be a BLOB.
+VT_CF (0x0047),MUST be a ClipboardData.
+VT_CLSID (0x0048),MUST be a GUID (Packet Version).
+VT_VERSIONED_STREAM (0x0049),MUST be a VersionedStream. The storage representing the (non-simple) property set MUST have a stream element with the name in the StreamName field.
+VT_VECTOR | VT_I2 (0x1002),"MUST be a VectorHeader followed by a sequence of 16-bit signed integers, followed by zero padding to a total length that is a multiple of 4 bytes."
+VT_VECTOR | VT_I4 (0x1003),MUST be a VectorHeader followed by a sequence of 32-bit signed integers.
+VT_VECTOR | VT_R4 (0x1004),MUST be a VectorHeader followed by a sequence of 4-byte (single-precision) IEEE floating-point numbers.
+VT_VECTOR | VT_R8 (0x1005),MUST be a VectorHeader followed by a sequence of 8-byte (double-precision) IEEE floating-point numbers.
+VT_VECTOR | VT_CY (0x1006),MUST be a VectorHeader followed by a sequence of CURRENCY (Packet Version) packets.
+VT_VECTOR | VT_DATE (0x1007),MUST be a VectorHeader followed by a sequence of DATE (Packet Version) packets.
+VT_VECTOR | VT_BSTR (0x1008),MUST be a VectorHeader followed by a sequence of CodePageString packets.
+VT_VECTOR | VT_ERROR (0x100A),"MUST be a VectorHeader followed by a sequence of 32-bit unsigned integers representing HRESULTs, as specified in [MS-DTYP] section 2.2.18."
+VT_VECTOR | VT_BOOL (0x100B),"MUST be a VectorHeader followed by a sequence of VARIANT_BOOL as specified in [MS-OAUT] section 2.2.27, followed by zero padding to a total length that is a multiple of 4 bytes."
+VT_VECTOR | VT_VARIANT (0x100C),MUST be a VectorHeader followed by a sequence of TypedPropertyValue packets.
+VT_VECTOR | VT_I1 (0x1010),"MUST be a VectorHeader followed by a sequence of 1-byte signed integers, followed by zero padding to a total length that is a multiple of 4 bytes."
+VT_VECTOR | VT_UI1 (0x1011),"MUST be a VectorHeader followed by a sequence of 1-byte unsigned integers, followed by zero padding to a total length that is a multiple of 4 bytes."
+VT_VECTOR | VT_UI2 (0x1012),"MUST be a VectorHeader followed by a sequence of 2-byte unsigned integers, followed by zero padding to a total length that is a multiple of 4 bytes."
+VT_VECTOR | VT_UI4 (0x1013),MUST be a VectorHeader followed by a sequence of 4-byte unsigned integers.
+VT_VECTOR | VT_I8 (0x1014),MUST be a VectorHeader followed by a sequence of 8-byte signed integers.
+VT_VECTOR | VT_UI8 (0x1015),MUST be a VectorHeader followed by a sequence of 8-byte unsigned integers.
+VT_VECTOR | VT_LPSTR (0x101E),MUST be a VectorHeader followed by a sequence of CodePageString packets.
+VT_VECTOR | VT_LPWSTR (0x101F),MUST be a VectorHeader followed by a sequence of UnicodeString packets.
+VT_VECTOR | VT_FILETIME (0x1040),MUST be a VectorHeader followed by a sequence of FILETIME (Packet Version) packets.
+VT_VECTOR | VT_CF (0x1047),MUST be a VectorHeader followed by a sequence of ClipboardData packets.
+VT_VECTOR | VT_CLSID (0x1048),MUST be a VectorHeader followed by a sequence of GUID (Packet Version) packets.
+VT_ARRAY | VT_I2 (0x2002),"MUST be an ArrayHeader followed by a sequence of 16-bit signed integers, followed by zero padding to a total length that is a multiple of 4 bytes."
+VT_ARRAY | VT_I4 (0x2003),MUST be an ArrayHeader followed by a sequence of 32-bit signed integers.
+VT_ARRAY | VT_R4 (0x2004),MUST be an ArrayHeader followed by a sequence of 4-byte (single-precision) IEEE floating-point numbers.
+VT_ARRAY | VT_R8 (0x2005),MUST be an ArrayHeader followed by a sequence of 8-byte (double-precision) IEEE floating-point numbers.
+VT_ARRAY | VT_CY (0x2006),MUST be an ArrayHeader followed by a sequence of CURRENCY (Packet Version) packets.
+VT_ARRAY | VT_DATE (0x2007),MUST be an ArrayHeader followed by a sequence of DATE (Packet Version) packets.
+VT_ARRAY | VT_BSTR (0x2008),MUST be an ArrayHeader followed by a sequence of CodePageString packets.
+VT_ARRAY | VT_ERROR (0x200A),"MUST be an ArrayHeader followed by a sequence of 32-bit unsigned integers representing HRESULTs, as specified in [MS-DTYP] section 2.2.18."
+VT_ARRAY | VT_BOOL (0x200B),"MUST be an ArrayHeader followed by a sequence of VARIANT_BOOL as specified in [MS-OAUT] section 2.2.27, followed by zero padding to a total length that is a multiple of 4 bytes."
+VT_ARRAY | VT_VARIANT (0x200C),MUST be an ArrayHeader followed by a sequence of TypedPropertyValue packets.
+VT_ARRAY | VT_DECIMAL (0x200E),MUST be an ArrayHeader followed by a sequence of DECIMAL (Packet Version) packets.
+VT_ARRAY | VT_I1 (0x2010),"MUST be an ArrayHeader followed by a sequence of 1-byte signed integers, followed by zero padding to a total length that is a multiple of 4 bytes."
+VT_ARRAY | VT_UI1 (0x2011),"MUST be an ArrayHeader followed by a sequence of 1-byte unsigned integers, followed by zero padding to a total length that is a multiple of 4 bytes."
+VT_ARRAY | VT_UI2 (0x2012),"MUST be an ArrayHeader followed by a sequence of 2-byte unsigned integers, followed by zero padding to a total length that is a multiple of 4 bytes."
+VT_ARRAY | VT_UI4 (0x2013),MUST be an ArrayHeader followed by a sequence of 4-byte unsigned integers.
+VT_ARRAY | VT_INT (0x2016),MUST be an ArrayHeader followed by a sequence of 4-byte signed integers.
+VT_ARRAY | VT_UINT (0x2017),MUST be an ArrayHeader followed by a sequence of 4-byte unsigned integers.

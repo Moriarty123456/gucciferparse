@@ -1,0 +1,22 @@
+cbMac,4 bytes, Specifies the count of bytes of those written to the WordDocument stream of the file that have any meaning. All bytes in the WordDocument stream at offset cbMac and greater MUST be ignored.
+reserved1,4 bytes, This value is undefined and MUST be ignored.
+reserved2,4 bytes, This value is undefined and MUST be ignored.
+ccpText,4 bytes, A signed integer that specifies the count of CPs in the main document. This value MUST be zero, 1, or greater.
+ccpFtn,4 bytes, A signed integer that specifies the count of CPs in the footnote subdocument. This value MUST be zero, 1, or greater.
+ccpHdd,4 bytes, A signed integer that specifies the count of CPs in the header subdocument. This value MUST be zero, 1, or greater.
+reserved3,4 bytes, This value MUST be zero and MUST be ignored.
+ccpAtn,4 bytes, A signed integer that specifies the count of CPs in the comment subdocument. This value MUST be zero, 1, or greater.
+ccpEdn,4 bytes, A signed integer that specifies the count of CPs in the endnote subdocument. This value MUST be zero, 1, or greater.
+ccpTxbx,4 bytes, A signed integer that specifies the count of CPs in the textbox subdocument of the main document. This value MUST be zero, 1, or greater.
+ccpHdrTxbx,4 bytes, A signed integer that specifies the count of CPs in the textbox subdocument of the header. This value MUST be zero, 1, or greater.
+reserved4,4 bytes, This value is undefined and MUST be ignored.
+reserved5,4 bytes, This value is undefined and MUST be ignored.
+reserved6,4 bytes, This value MUST be equal or less than the number of data elements in PlcBteChpx, as specified by FibRgFcLcb97.fcPlcfBteChpx and FibRgFcLcb97.lcbPlcfBteChpx. This value MUST be ignored.
+reserved7,4 bytes, This value is undefined and MUST be ignored
+reserved8,4 bytes, This value is undefined and MUST be ignored
+reserved9,4 bytes, This value MUST be less than or equal to the number of data elements in PlcBtePapx, as specified by FibRgFcLcb97.fcPlcfBtePapx andFibRgFcLcb97.lcbPlcfBtePapx. This value MUST be ignored.
+reserved10,4 bytes, This value is undefined and MUST be ignored.
+reserved11,4 bytes, This value is undefined and MUST be ignored.
+reserved12,4 bytes, This value SHOULD <26> be zero, and MUST be ignored.
+reserved13,4 bytes, This value MUST be zero and MUST be ignored.
+reserved14,4 bytes, This value MUST be zero and MUST be ignored.

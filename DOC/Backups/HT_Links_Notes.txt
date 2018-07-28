@@ -1,0 +1,117 @@
+_PID_HLINKS MUST be a VtHyperlinks property (section 2.3.3.1.21).
+Specifies a list of hyperlinks contained in the document.
+MUST NOT be linked.
+
+['41000000',
+wType (2 bytes): An unsigned integer that MUST be equal to VT_BLOB (0x0041).
+padding (2 bytes): An unsigned integer that MUST be 0x0000. MUST be ignored.
+
+
+
+
+vtValue (variable): MUST be a VtHyperlinkValue structure (section 2.3.3.1.20).
+cbData (4 bytes): An unsigned integer that specifies the size in bytes of vecHyperlink.
+
+'c8030000', =968 bytes  
+
+vecHyperlink (variable): MUST be a VecVtHyperlink structure (section 2.3.3.1.19).VecVtHyperlink
+Specifies the data format for an array of hyperlinks.
+
+'36000000', = cElements (4 bytes): = 54 / 6 =9
+An unsigned integer specifying the count of elements in the rgHyperlink field.
+The number of elements in rgHyperlink MUST be 1/6 of this value. This value MUST be evenly
+divisible by 6.
+
+No1 rgHyperlink (variable): An array of VtHyperlink (section 2.3.3.1.18). Specifies the list of
+hyperlinks for the property.
+'03000000', '07003700', = dwHash (8 bytes): MUST be a VT_I4 TypedPropertyValue as specified in [MS-OLEPS] section
+2.15. The Value field of this structure SHOULD be calculated as specified in the Hyperlink Hash
+(section 2.4.2) section with the hlink1 field and hlink2 field string values given as input.<24>
+
+'03000000', '08000100', = dwApp (8 bytes): MUST be a VT_I4 TypedPropertyValue as specified in [MS-OLEPS] section 2.15.
+The Value field of this structure is implementation specific.<25>
+
+'03000000', '00000000', = dwOfficeArt (8 bytes): MUST be a VT_I4 TypedPropertyValue as specified in [MS-OLEPS] section
+2.15. The Value field of this structure MUST be a MSOSPID type value ([MS-ODRAW] section
+2.1.2) specifying the identifier of the shape ([MS-ODRAW] section 2.2.31) to which this hyperlink
+applies in the document. If this hyperlink does not apply to a shape, the Value field of this
+structure MUST be 0x00000000.
+
+
+'03000000', '06000000', = dwInfo (8 bytes): MUST be a VT_I4 TypedPropertyValue as specified in [MS-OLEPS] section 2.15.
+The Value field of this structure is implementation specific.<26> The high-order 2-byte integer of
+the Value field of this structure SHOULD be 0x0000.<27>
+0x00000005 = Word 97, Word 2000, Word 2002, Office Word 2003, Office Word 2007, Word 2010, and Word 2013
+
+0x00000006 = Excel 97, Excel 2000, Excel 2002, Office Excel 2003, Office Excel 2007, Excel 2010, Excel 2013
+
+0x0000007 =  PowerPoint 97,PowerPoint 2000, PowerPoint 2002, Office PowerPoint 2003, Office PowerPoint 2007, PowerPoint 2010, PowerPoint 2013 
+
+
+
+
+'1f000000', '1c000000', = hlink1 (variable) 1c=28 : MUST be a VtString structure (section 2.3.3.1.11) with hlink1.wType equal to
+VT_LPWSTR. hlink1.stringValue specifies the hyperlink target.
+
+
+
+6d006100', '69006c00', '74006f00', '3a007000', '61007400', '68004300', '61006e00', '40006300', '69007400', '65006300', '68006300', '6f002e00', '6e006500', '74000000', '
+
+1f000000', '01000000', '00000000',
+
+'03000000','09002b00',
+'03000000', '07000100',
+'03000000', '00000000',
+'03000000', '06000000',
+
+'1f000000', '18000000', '6d006100', '69006c00', '74006f00', '3a006c00', '62006500', '6c006400', '65006e00', '40006800', '68006300', '63002e00', '63006f00', '6d000000', '
+
+1f000000', '01000000', '00000000',
+'03000000', '6b004000',
+'03000000', '06000100',
+'03000000', '00000000',
+'03000000', '06000000',
+'1f000000', '1a000000', '6d006100', '69006c00', '74006f00', '3a006a00', '61007a00', '72006100', '63006b00', '40007300', '61006b00', '63006100', '70002e00', '63006f00', '6d000000', '
+
+1f000000', '01000000', '00000000',
+'03000000', '0a007100',
+'03000000', '05000100',
+'03000000', '00000000',
+'03000000', '06000000',
+'1f000000', '1c000000', '6d006100', '69006c00', '74006f00', '3a006300', '6b006100', '70006c00', '61006e00', '40006700', '6c002d00', '6e007900', '6c006100', '77002e00', '63006f00', '6d000000',
+
+'1f000000', '01000000', '00000000',
+'03000000', '76004200',
+'03000000', '04000100',
+'03000000', '00000000',
+'03000000', '06000000',
+'1f000000', '1a000000',
+'6d006100', '69006c00', '74006f00', '3a004300', '68007200', '69007300', '40006d00', '61007300', '73003200', '30003200', '30002e00', '6f007200', '67000000',
+
+'1f000000', '01000000', '00000000',
+'03000000', '46007700',
+'03000000', '03000100',
+'03000000', '00000000',
+'03000000', '06000000',
+'1f000000', '1a000000', '6d006100', '69006c00', '74006f00', '3a006a00', '66006c00', '65006d00', '69006e00', '67004000', '6f007800', '62006900', '6f002e00', '63006f00', '6d000000',
+
+'1f000000', '01000000', '00000000',
+'03000000', '7a005300',
+'03000000', '02000100',
+'03000000', '00000000',
+'03000000', '06000000',
+'1f000000', '1f000000', '6d006100', '69006c00', '74006f00', '3a007600', '65006c00', '6d006100', '6c006500', '68004000', '77007700', '68006f00', '6c006400', '69006e00', '67007300', '2e006300', '6f006d00', '00000000',
+
+'1f000000', '01000000', '00000000',
+'03000000', '46006800',
+'03000000', '01000100',
+'03000000', '00000000',
+'03000000', '06000000',
+'1f000000', '1a000000', '6d006100', '69006c00', '74006f00', '3a006800', '61006c00', '6c006500', '6e004000', '61006c00', '6c006500', '6e006300', '6f002e00', '63006f00', '6d000000',
+
+'1f000000', '01000000', '00000000',
+'03000000', '4c007200',
+'03000000', '00000100',
+'03000000', '00000000',
+'03000000', '06000000',
+'1f000000', '1f000000', '6d006100', '69006c00', '74006f00', '3a004100', '72006f00', '6e007300', '6f006e00', '40006100', '6a006f00', '70006100', '72007400', '6e006500', '72007300', '2e006300', '6f006d00', '00000000', '1f000000', '01000000', '00000000']

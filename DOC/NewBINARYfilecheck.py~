@@ -1,0 +1,194 @@
+import sys
+
+sys.path.append("/home/david/Documents/ClintonJail/Guccifer2.0/Docs&Tools/Python/ALL_GUC_FILE_PROJECT/python/modules/DOC")
+
+from binarytoolkit import *
+from docsuminfoPARSE import *
+
+
+#infile = "/home/david/Documents/ClintonJail/Guccifer2.0/Docs&Tools/Python/ALL_GUC_FILE_PROJECT/downloaded_docs/xls/1st-quarter-targeted-renewals.xls"
+
+#infile = "/home/david/Documents/ClintonJail/Guccifer2.0/Docs&Tools/Python/ALL_GUC_FILE_PROJECT/downloaded_docs/xls/out-of-region-ne-donors.xls"
+
+
+infile = "/home/david/Documents/ClintonJail/Guccifer2.0/Docs&Tools/Python/ALL_GUC_FILE_PROJECT/downloaded_docs/doc/foreign-donations-fpotus-foundations.doc"
+
+SISPropDict = {}
+
+def OfficalDSLocation(herx):
+    #INPUT: The hex as a string
+    #OUTPUT1: list of where the Doc Sum SHOULD be.
+    #OUTPUT2: list of where there is 05004400, but NO location.
+    # some documents have two directory entries, so make list of directory entries.
+    DSLLocList, DSLHeadList =OutputFFslist(herx, "05004400",256)
+    RootDSList = []
+    RootNoLocDS = []
+    for x in DSLHeadList:
+        sislist =  Header2FourBytes(x)
+        # Location of Doc Sum Info is given by third to last chunk
+        sl= sislist[-3]
+        # check that this location is not blank if it is add it to RootNoLocDS:
+        if int(sl,16) == 0:
+            RootNoLocDS.append("Missing DS Sector Location")
+        else:
+            secloc = sl[6:8]+sl[4:6]+sl[2:4]+sl[0:2]
+            # Size of Doc Sum Info is given by second to last chunk. Seems to usually be 00100000, or 4096 in dec.
+            ss = sislist[-2]
+            secsize = ss[6:8]+ss[4:6]+ss[2:4]+ss[0:2]
+            # Calculate start and end of sector & append to list.
+            decimalsectorlocation = 2*((int(secloc,16)+1)*512)
+            RootDSList.append(decimalsectorlocation/2)
+    #print RootDSList, RootNoLocDS
+    return RootDSList, RootNoLocDS
+
+def AlteredfileCheck(infile, SISPropDict):
+    #INPUT: The file path
+    #OUTPUT: appends to SISPropDict number and locations of root dirs, number of summaryinfos, and docsuminfos and userinfos
+    # Sometimes, in altered documents, there are two root directories.
+    # In this case the Doc Summary linked to by root does not have an offset
+    # To get round this we envoke this function which calls a list made up of the main hex split at every "FEFF0000", which is the header of all a) Summary Info (uuid starts E0859FF2), b) Document Summary Information (uuid 02D5CDD5, and which should include the user-defined information[05D5CDD5]), and c) if the document has been altered a third group of either just Document Summary info, or doc sum and User defined info.
+    ###########################
+    # get list, positions, of all sections starting "FEFF0000"
+    herx = OutputHex(infile)
+    poslist, chunklist = OutputFFslist(herx, "feff0000", 1024)
+    # result poslist, hex 53760 0xd200 57856 0xe200 64512 0xfc00
+    SISPropDict["NumberofFEFF0000sections"] = len(poslist)
+    # in dsShouldbeList, there should be only one entry the official Document Summary Info location, but make it a list just in case
+    # and add the other, non-official locations to a list. Add both to our dict.
+    dsShouldbeList, dsIsntList = OfficalDSLocation(herx)
+    FFFELocations = []
+    for x in poslist:
+        
+        if x in dsShouldbeList:
+            officialDSLoc = x
+            SISPropDict["OfficialDocSumLocation"] = officialDSLoc
+        else:
+            FFFELocations.append(x)
+    SISPropDict["OtherFEFFLocations" ] = FFFELocations
+    # print "FFFELocations ", FFFELocations --> FFFELocations  [53760, 64512]
+    print "FFFELocations ", FFFELocations
+    if dsIsntList:
+        for q in FFFELocations:
+            print q
+
+            if "e0859ff2f94f6810" in herx[q*2:q*2+256]:
+                SISPropDict["SummaryInformationLocation"] = q
+            else:
+                pass
+            if "55c18c4c1e6cd111" in herx[q*2:q*2+256]:
+                SISPropDict["AlternateStreamLocation"] = q
+            else:
+                pass
+            if "05d5cdd59c2e1b10" in herx[q*2:q*2+256] and "02d5cdd59c2e1b10" in herx[q*2:q*2+256]:
+                SISPropDict["DocSumandUserDefinedLocation"] = q
+            else:
+                pass
+            if "05d5cdd59c2e1b10" in herx[q*2:q*2+256] and not "02d5cdd59c2e1b10" in herx[q*2:q*2+256]:
+                SISPropDict["DocSumOnlyLocation"] = q
+            else:
+                pass
+    return SISPropDict
+    
+print AlteredfileCheck(infile, SISPropDict)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+# def SISTwo(siscontents):
+#     # moved to global  SISPropDict = {}
+#     print siscontents[0]
+#     #we know the likely guids ...
+#     if siscontents[12] == "05d5cdd5":
+#         SISPropDict["SISUserGUID"] = "{D5CDD505-2E9C-101B-9397-08002B2CF9AE}"
+#     else:
+#         # there's something wrong. There should be the User Defined GUID Here. 
+#         badfile(siscontents)
+#         print "there's something wrong. There should be the User Defined GUID Here."
+#         SISPropDict["SISInfoGUID"] = siscontents[12]+siscontents[13]+siscontents[14]+siscontents[15]
+#     so = siscontents[16]
+    
+#     SISPropDict["SISOffsetHex"]=hex(int(so[6:8]+so[4:6]+so[2:4]+so[0:2],16))
+#     SISPropDict["SISOffsetDec"]=int(so[6:8]+so[4:6]+so[2:4]+so[0:2],16)
+
+#     #######################################
+#     # THIS IS THE START OF THE DICTIONARY #
+#     #######################################
+#     # dl = dictlocation
+#     dl=(int(so[6:8]+so[4:6]+so[2:4]+so[0:2],16))/4
+#     # first entry is dictsize
+#     dictsize = siscontents[(int(so[6:8]+so[4:6]+so[2:4]+so[0:2],16))/4]
+#     np = siscontents[dl+1]
+#     NumProps = int(np[6:8]+np[4:6]+np[2:4]+np[0:2],16)
+#     SISPropDict["SISNumProperties"]= NumProps
+    
+#     SISPropDict["SISWhatISThis"]=siscontents[dl+2:dl+4]
+#     userDictList = []
+#     for x in range(0,(NumProps-1)*2,2):
+        
+#         anEntry = []
+#         aItem = siscontents[dl+4+x]
+#         anEntry.append(aItem)
+        
+#         aLocation = siscontents[dl+4+x+1]
+#         anEntry.append(aLocation)
+#         chunkLocation = dl+(int(aLocation[6:8]+aLocation[4:6]+aLocation[2:4]+aLocation[0:2],16))/4
+#         anEntry.append(chunkLocation)
+        
+#         userDictList.append(anEntry)
+#     #work out length of dict entries
+#     udictlengths = []
+#     for udictkey in userDictList:
+#         udictlengths.append(udictkey[2])
+#     FinalUdictList = []
+#     #add length to list. Last one or two may be negative due to python starting count at zero. work out a hack.
+
+
+#     for x in range(0,len(udictlengths)-1):
+#         UDEntrysize = udictlengths[x+1]-udictlengths[x]
+#         if UDEntrysize > 0:
+#             userDictList[x].append(UDEntrysize)
+#             userDictList[x].append(siscontents[udictlengths[x]:udictlengths[x+1]])
+#         else:
+#             userDictList.append(0)
+#             userDictList.append(0)        
+#     #see: https://msdn.microsoft.com/en-us/library/dd925853(v=office.12).aspx
+#     # now we add the dictionary keys.
+#     # The first entry 01000000 should always be missing as it's the codepage
+#     # The rest of them have number (i.e. 02000000), then length, then the text
+#     # We set the real number of entries (exc Code Page) as realentries
+   
+#     rl = siscontents[(dl+2)+(2*NumProps)]
+#     realentries = int(rl[6:8]+rl[4:6]+rl[2:4]+rl[0:2],16)
+    
+#     # BUT the number can start in a chunk! Like, for "06" we have
+#     # 74 00 06 00  00 00 0D 00  00 00 5F 41  75 74 68 6F
+#     # the first key will be at dl+3. So we join from dl+3 to the end and then split into bytes.
+#     firstentry = dl+3
+    
+    
+#     print "First Entry", siscontents[firstentry+2*NumProps]
+
+
+
+#     # for x in range(1,NumProps):
+#     #     print "THIS IT?: ", siscontents[dl+x+(NumProps+1)*2]
+#     # for item in userDictList:
+#     #   print item
+
+#     ##########################################################
+#     # CONTINUE FROM HERE:                                    #
+#     # https://msdn.microsoft.com/en-us/library/dd942093.aspx #
+#     ##########################################################
+

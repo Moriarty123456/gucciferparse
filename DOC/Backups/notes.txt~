@@ -1,0 +1,19 @@
+8 0600 / 00 00 mini sector shift / Reserved
+9 00 00 00 00 Reserved
+10 00 00 00 00 Number of DS 
+11 06 00 00 00 Number of FAT 
+12 7a 02 00 00 First DSL
+13 00 00 00 00 Transaction Signature Number
+14 00100000 Minstream Cutoff size
+15 7c020000 First MiniFat Sector Location
+16 01000000 Number of Mini FAT Sectors 
+17 feffffff First DIFAT Sector Location
+18 00000000 Number of DIFAT Sectors
+19 74020000 DIFAT [1]
+20 75020000
+21 76020000
+22 77020000
+23 7b020000 DIFAT [n]
+This array of 32-bit integer fields contains the first 109 FAT sector locations of the compound file.
+
+    For version 4 compound files, the header size (512 bytes) is less than the sector size (4,096 bytes), so the remaining part of the header (3,584 bytes) MUST be filled with all zeroes.

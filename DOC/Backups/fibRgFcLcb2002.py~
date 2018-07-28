@@ -1,0 +1,223 @@
+fcUnused1 (4 bytes): This value is undefined and MUST be ignored.
+lcbUnused1 (4 bytes): This value MUST be zero, and MUST be ignored
+fcPlcfPgp (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A PGPArray
+begins at this offset. If lcbPlcfPgp is 0, fcPlcfPgp is undefined and MUST be ignored.
+lcbPlcfPgp (4 bytes): An unsigned integer that specifies the size, in bytes, of the PGPArray that is
+stored at offset fcPlcfPgp.
+fcPlcfuim (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A Plcfuim
+begins at this offset. If lcbPlcfuim is zero, fcPlcfuim is undefined and MUST be ignored.
+lcbPlcfuim (4 bytes): An unsigned integer that specifies the size, in bytes, of the Plcfuim at offset
+fcPlcfuim.
+fcPlfguidUim (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A
+PlfguidUim begins at this offset. If lcbPlfguidUim is zero, fcPlfguidUim is undefined and MUST
+be ignored.
+lcbPlfguidUim (4 bytes): An unsigned integer that specifies the size, in bytes, of the PlfguidUim at
+offset fcPlfguidUim.
+fcAtrdExtra (4 bytes): An unsigned integer that specifies an offset in the Table Stream. An
+AtrdExtra begins at this offset. If lcbAtrdExtra is zero, fcAtrdExtra is undefined and MUST be
+ignored.
+lcbAtrdExtra (4 bytes): An unsigned integer that specifies the size, in bytes, of the AtrdExtra at
+offset fcAtrdExtra in the Table Stream.
+fcPlrsid (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A PLRSID
+begins at this offset. If lcbPlrsid is zero, fcPlrsid is undefined and MUST be ignored.
+lcbPlrsid (4 bytes): An unsigned integer that specifies the size, in bytes, of the PLRSID at offset
+fcPlrsid in the Table Stream.
+fcSttbfBkmkFactoid (4 bytes): An unsigned integer that specifies an offset in the Table Stream. An
+SttbfBkmkFactoid containing information about smart tag bookmarks in the document begins
+at this offset. If lcbSttbfBkmkFactoid is zero, fcSttbfBkmkFactoid is undefined and MUST be
+ignored.
+The SttbfBkmkFactoid is parallel to the PlcfBkfd at offset fcPlcfBkfFactoid in the Table
+Stream. Each element in the SttbfBkmkFactoid specifies information about the bookmark that is
+associated with the data element which is located at the same offset in that PlcfBkfd. For this
+reason, the SttbfBkmkFactoid that begins at offset fcSttbfBkmkFactoid, and the PlcfBkfd that
+begins at offset fcPlcfBkfFactoid, MUST contain the same number of elements.
+lcbSttbfBkmkFactoid (4 bytes): An unsigned integer that specifies the size, in bytes, of the
+SttbfBkmkFactoid at offset fcSttbfBkmkFactoid.
+fcPlcfBkfFactoid (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A
+PlcfBkfd that contains information about the smart tag bookmarks in the document begins at this
+offset. If lcbPlcfBkfFactoid is zero, fcPlcfBkfFactoid is undefined and MUST be ignored.
+Each data element in the PlcfBkfd is associated, in a one-to-one correlation, with a data element
+in the Plcfbkld at offset fcPlcfBklFactoid. For this reason, the PlcfBkfd that begins at offset
+fcPlcfBkfFactoid, and the Plcfbkld that begins at offset fcPlcfBklFactoid, MUST contain the
+same number of data elements. The PlcfBkfd is parallel to the SttbfBkmkFactoid at offset
+fcSttbfBkmkFactoid in the Table Stream. Each data element in the PlcfBkfd specifies
+85 / 577
+[MS-DOC] - v20150904
+Word (.doc) Binary File Format
+Copyright © 2015 Microsoft Corporation
+Release: September 4, 2015information about the bookmark that is associated with the element which is located at the same
+offset in that SttbfBkmkFactoid. For this reason, the PlcfBkfd that begins at offset
+fcPlcfBkfFactoid, and the SttbfBkmkFactoid that begins at offset fcSttbfBkmkFactoid, MUST
+contain the same number of elements.
+lcbPlcfBkfFactoid (4 bytes): An unsigned integer that specifies the size, in bytes, of the PlcfBkfd at
+offset fcPlcfBkfFactoid.
+fcPlcfcookie (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A
+Plcfcookie begins at this offset. If lcbPlcfcookie is zero, fcPlcfcookie is undefined and MUST be
+ignored. fcPlcfcookie MAY<79> be ignored.
+lcbPlcfcookie (4 bytes): An unsigned integer that specifies the size, in bytes, of the Plcfcookie at
+offset fcPlcfcookie in the Table Stream.
+fcPlcfBklFactoid (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A
+Plcfbkld that contains information about the smart tag bookmarks in the document begins at this
+offset. If lcbPlcfBklFactoid is zero, fcPlcfBklFactoid is undefined and MUST be ignored.
+Each data element in the Plcfbkld is associated, in a one-to-one correlation, with a data element
+in the PlcfBkfd at offset fcPlcfBkfFactoid. For this reason, the Plcfbkld that begins at offset
+fcPlcfBklFactoid, and the PlcfBkfd that begins at offset fcPlcfBkfFactoid, MUST contain the
+same number of data elements.
+lcbPlcfBklFactoid (4 bytes): An unsigned integer that specifies the size, in bytes, of the Plcfbkld at
+offset fcPlcfBklFactoid.
+fcFactoidData (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A
+SmartTagData begins at this offset and specifies information about the smart tag recognizers
+that are used in this document. If lcbFactoidData is zero, fcFactoidData is undefined and MUST
+be ignored.
+lcbFactoidData (4 bytes): An unsigned integer that specifies the size, in bytes, of the SmartTagData
+at offset fcFactoidData in the Table Stream.
+fcDocUndo (4 bytes): An unsigned integer that specifies an offset in the WordDocument Stream.
+Version-specific undo information begins at this offset. This information SHOULD NOT<80> be
+emitted and SHOULD<81> be ignored.
+lcbDocUndo (4 bytes): An unsigned integer. If this value is nonzero, version-specific undo
+information exists at offset fcDocUndo in the WordDocument Stream.
+fcSttbfBkmkFcc (4 bytes): An unsigned integer that specifies an offset in the Table Stream. An
+SttbfBkmkFcc that contains information about the format consistency-checker bookmarks in
+the document begins at this offset. If lcbSttbfBkmkFcc is zero, fcSttbfBkmkFcc is undefined
+and MUST be ignored.
+The SttbfBkmkFcc is parallel to the PlcfBkfd at offset fcPlcfBkfFcc in the Table Stream. Each
+element in the SttbfBkmkFcc specifies information about the bookmark that is associated with
+the data element which is located at the same offset in that PlcfBkfd. For this reason, the
+SttbfBkmkFcc that begins at offset fcSttbfBkmkFcc, and the PlcfBkfd that begins at offset
+fcPlcfBkfFcc, MUST contain the same number of elements.
+lcbSttbfBkmkFcc (4 bytes): An unsigned integer that specifies the size, in bytes, of the
+SttbfBkmkFcc at offset fcSttbfBkmkFcc.
+fcPlcfBkfFcc (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A PlcfBkfd
+that contains information about format consistency-checker bookmarks in the document begins at
+this offset. If lcbPlcfBkfFcc is zero, fcPlcfBkfFcc is undefined and MUST be ignored.
+86 / 577
+[MS-DOC] - v20150904
+Word (.doc) Binary File Format
+Copyright © 2015 Microsoft Corporation
+Release: September 4, 2015Each data element in the PlcfBkfd is associated, in a one-to-one correlation, with a data element
+in the PlcfBkld at offset fcPlcfBklFcc. For this reason, the PlcfBkfd that begins at offset
+fcPlcfBkfFcc and the PlcfBkld that begins at offset fcPlcfBklFcc MUST contain the same number
+of data elements. The PlcfBkfd is parallel to the SttbfBkmkFcc at offset fcSttbfBkmkFcc in the
+Table Stream. Each data element in the PlcfBkfd specifies information about the bookmark that is
+associated with the element which is located at the same offset in that SttbfBkmkFcc. For this
+reason, the PlcfBkfd that begins at offset fcPlcfBkfFcc and the SttbfBkmkFcc that begins at
+offset fcSttbfBkmkFcc MUST contain the same number of elements.
+lcbPlcfBkfFcc (4 bytes): An unsigned integer that specifies the size, in bytes, of the PlcfBkfd at
+offset fcPlcfBkfFcc.
+fcPlcfBklFcc (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A PlcfBkld
+that contains information about the format consistency-checker bookmarks in the document
+begins at this offset. If lcbPlcfBklFcc is zero, fcPlcfBklFcc is undefined and MUST be ignored.
+Each data element in the PlcfBkld is associated, in a one-to-one correlation, with a data element
+in the PlcfBkfd at offset fcPlcfBkfFcc. For this reason, the PlcfBkld that begins at offset
+fcPlcfBklFcc, and the PlcfBkfd that begins at offset fcPlcfBkfFcc, MUST contain the same
+number of data elements.
+lcbPlcfBklFcc (4 bytes): An unsigned integer that specifies the size, in bytes, of the PlcfBkld at
+offset fcPlcfBklFcc.
+fcSttbfbkmkBPRepairs (4 bytes): An unsigned integer that specifies an offset in the Table Stream.
+An SttbfBkmkBPRepairs that contains information about the repair bookmarks in the
+document begins at this offset. If lcbSttbfBkmkBPRepairs is zero, fcSttbfBkmkBPRepairs is
+undefined and MUST be ignored.
+The SttbfBkmkBPRepairs is parallel to the PlcfBkf at offset fcPlcfBkfBPRepairs in the Table
+Stream. Each element in the SttbfBkmkBPRepairs specifies information about the bookmark
+that is associated with the data element which is located at the same offset in that PlcfBkf. For
+this reason, the SttbfBkmkBPRepairs that begins at offset fcSttbfBkmkBPRepairs, and the
+PlcfBkf that begins at offset fcPlcfBkfBPRepairs, MUST contain the same number of elements.
+lcbSttbfbkmkBPRepairs (4 bytes): An unsigned integer that specifies the size, in bytes, of the
+SttbfBkmkBPRepairs at offset fcSttbfBkmkBPRepairs.
+fcPlcfbkfBPRepairs (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A
+PlcfBkf that contains information about the repair bookmarks in the document begins at this
+offset. If lcbPlcfBkfBPRepairs is zero, fcPlcfBkfBPRepairs is undefined and MUST be ignored.
+Each data element in the PlcfBkf is associated, in a one-to-one correlation, with a data element in
+the PlcfBkl at offset fcPlcfBklBPRepairs. For this reason, the PlcfBkf that begins at offset
+fcPlcfBkfBPRepairs, and the PlcfBkl that begins at offset fcPlcfBklBPRepairs, MUST contain
+the same number of data elements. The PlcfBkf is parallel to the SttbfBkmkBPRepairs at offset
+fcSttbfBkmkBPRepairs in the Table Stream. Each data element in the PlcfBkf specifies
+information about the bookmark that is associated with the element which is located at the same
+offset in that SttbfBkmkBPRepairs. For this reason, the PlcfBkf that begins at offset
+fcPlcfbkfBPRepairs, and the SttbfBkmkBPRepairs that begins at offset
+fcSttbfBkmkBPRepairs, MUST contain the same number of elements.
+The CPs in this PlcfBkf MUST NOT exceed the CP that represents the end of the Main Document
+part.
+lcbPlcfbkfBPRepairs (4 bytes): An unsigned integer that specifies the size, in bytes, of the PlcfBkf
+at offset fcPlcfbkfBPRepairs.
+87 / 577
+[MS-DOC] - v20150904
+Word (.doc) Binary File Format
+Copyright © 2015 Microsoft Corporation
+Release: September 4, 2015fcPlcfbklBPRepairs (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A
+PlcfBkl that contains information about the repair bookmarks in the document begins at this
+offset. If lcbPlcfBklBPRepairs is zero, fcPlcfBklBPRepairs is undefined and MUST be ignored.
+Each data element in the PlcfBkl is associated, in a one-to-one correlation, with a data element in
+the PlcfBkf at offset fcPlcfBkfBPRepairs. For this reason, the PlcfBkl that begins at offset
+fcPlcfBklBPRepairs, and the PlcfBkf that begins at offset fcPlcfBkfBPRepairs, MUST contain
+the same number of data elements.
+The CPs that are contained in this PlcfBkl MUST NOT exceed the CP that represents the end of the
+Main Document part.
+lcbPlcfbklBPRepairs (4 bytes): An unsigned integer that specifies the size, in bytes, of the PlcfBkl
+at offset fcPlcfBklBPRepairs.
+fcPmsNew (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A new Pms,
+which contains the current state of a print merge operation, begins at this offset. If lcbPmsNew
+is zero, fcPmsNew is undefined and MUST be ignored.
+lcbPmsNew (4 bytes): An unsigned integer which specifies the size, in bytes, of the Pms at offset
+fcPmsNew.
+fcODSO (4 bytes): An unsigned integer that specifies an offset in the Table Stream. Office Data
+Source Object (ODSO) data that is used to perform mail merge begins at this offset. The data is
+stored in an array of ODSOPropertyBase items. The ODSOPropertyBase items are of variable
+size and are stored contiguously. The complete set of properties that are contained in the array is
+determined by reading each ODSOPropertyBase, until a total of lcbODSO bytes of data are
+read. If lcbODSO is zero, fcODSO is undefined and MUST be ignored.
+lcbODSO (4 bytes): An unsigned integer that specifies the size, in bytes, of the Office Data Source
+Object data at offset fcODSO in the Table Stream.
+fcPlcfpmiOldXP (4 bytes): An unsigned integer that specifies an offset in the Table Stream. The
+deprecated paragraph mark information cache begins at this offset. Information SHOULD
+NOT<82> be emitted at this offset and SHOULD<83> be ignored. If lcbPlcfpmiOldXP is zero,
+fcPlcfpmiOldXP is undefined and MUST be ignored.
+lcbPlcfpmiOldXP (4 bytes): An unsigned integer that specifies the size, in bytes, of the deprecated
+paragraph mark information cache at offset fcPlcfpmiOldXP in the Table Stream. This value
+SHOULD<84> be zero.
+fcPlcfpmiNewXP (4 bytes): An unsigned integer that specifies an offset in the Table Stream. The
+deprecated paragraph mark information cache begins at this offset. Information SHOULD
+NOT<85> be emitted at this offset and SHOULD<86> be ignored. If lcbPlcfpmiNewXP is zero,
+fcPlcfpmiNewXP is undefined and MUST be ignored.
+lcbPlcfpmiNewXP (4 bytes): An unsigned integer that specifies the size, in bytes, of the deprecated
+paragraph mark information cache at offset fcPlcfpmiNewXP in the Table Stream. This value
+SHOULD<87> be zero.
+fcPlcfpmiMixedXP (4 bytes): An unsigned integer that specifies an offset in the Table Stream. The
+deprecated paragraph mark information cache begins at this offset. Information SHOULD
+NOT<88> be emitted at this offset and SHOULD<89> be ignored. If lcbPlcfpmiMixedXP is zero,
+fcPlcfpmiMixedXP is undefined and MUST be ignored.
+lcbPlcfpmiMixedXP (4 bytes): An unsigned integer that specifies the size, in bytes, of the
+deprecated paragraph mark information cache at offset fcPlcfpmiMixedXP in the Table Stream.
+This value SHOULD<90> be zero.
+fcUnused2 (4 bytes): This value is undefined and MUST be ignored.
+88 / 577
+[MS-DOC] - v20150904
+Word (.doc) Binary File Format
+Copyright © 2015 Microsoft Corporation
+Release: September 4, 2015lcbUnused2 (4 bytes): This value MUST be zero, and MUST be ignored.
+fcPlcffactoid (4 bytes): An unsigned integer that specifies an offset in the Table Stream. A
+Plcffactoid, which specifies the smart tag recognizer state of each text range, begins at this
+offset. If lcbPlcffactoid is zero, fcPlcffactoid is undefined and MUST be ignored.
+lcbPlcffactoid (4 bytes): An unsigned integer that specifies the size, in bytes of the Plcffactoid
+that begins at offset fcPlcffactoid in the Table Stream.
+fcPlcflvcOldXP (4 bytes): An unsigned integer that specifies an offset in the Table Stream. The
+deprecated listnum field cache begins at this offset. Information SHOULD NOT<91> be emitted at
+this offset and SHOULD<92> be ignored. If lcbPlcflvcOldXP is zero, fcPlcflvcOldXP is undefined
+and MUST be ignored.
+lcbPlcflvcOldXP (4 bytes): An unsigned integer that specifies the size, in bytes, of the deprecated
+listnum field cache at offset fcPlcflvcOldXP in the Table Stream. This value SHOULD<93> be
+zero.
+fcPlcflvcNewXP (4 bytes): An unsigned integer that specifies an offset in the Table Stream. The
+deprecated listnum field cache begins at this offset. Information SHOULD NOT<94> be emitted at
+this offset and SHOULD<95> be ignored. If lcbPlcflvcNewXP is zero, fcPlcflvcNewXP is
+undefined and MUST be ignored.
+lcbPlcflvcNewXP (4 bytes): An unsigned integer that specifies the size, in bytes, of the deprecated
+listnum field cache at offset fcPlcflvcNewXP in the Table Stream. This value SHOULD<96> be
+zero.
+fcPlcflvcMixedXP (4 bytes): An unsigned integer that specifies an offset in the Table Stream. The
+deprecated listnum field cache begins at this offset. Information SHOULD NOT<97> be emitted at
+this offset and SHOULD<98> be ignored. If lcbPlcflvcMixedXP is zero, fcPlcflvcMixedXP is
+undefined and MUST be ignored.
+lcbPlcflvcMixedXP (4 bytes): An unsigned integer that specifies the size, in bytes, of the
+deprecated listnum field cache at offset fcPlcflvcMixedXP in the Table Stream. This value
+SHOULD<99> be zero.
