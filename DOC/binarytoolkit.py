@@ -489,3 +489,8 @@ def writelinetoCSV(aline):
         an_entry = csv.writer(f)
         an_entry.writerow(aline)
     f.close()
+
+def dummy(teststuff):
+    print "version control"
+
+    
